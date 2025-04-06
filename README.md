@@ -8,6 +8,7 @@ A modern, bilingual (PT/EN) website for Gwan Company, built with React and TypeS
 - 🎨 Modern, responsive design
 - 🚀 Optimized for production
 - 🔄 Automated CI/CD pipeline
+- 🐳 Docker support for easy deployment
 
 ## Development
 
@@ -19,7 +20,53 @@ npm install
 npm start
 ```
 
-## Deployment
+## Docker Deployment
+
+### Prerequisites
+- Docker installed on your system
+- Git (for cloning the repository)
+
+### Quick Start with Docker
+
+1. Clone the repository:
+```bash
+git clone https://github.com/rastamansp/gwan-site.git
+cd gwan-site
+```
+
+2. Build the Docker image:
+```bash
+docker build -t gwan-site .
+```
+
+3. Run the container:
+```bash
+docker run -d -p 80:80 --name gwan-site gwan-site
+```
+
+4. Access the site:
+- Open http://localhost in your browser
+
+### Docker Commands Reference
+
+```bash
+# Stop the container
+docker stop gwan-site
+
+# Start the container
+docker start gwan-site
+
+# View container logs
+docker logs gwan-site
+
+# Remove the container
+docker rm gwan-site
+
+# Remove the image
+docker rmi gwan-site
+```
+
+## VPS Deployment
 
 ### Prerequisites
 
