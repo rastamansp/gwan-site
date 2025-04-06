@@ -10,6 +10,23 @@ interface Message {
   timestamp: Date;
 }
 
+// Handle preflight requests
+const originalFetch = window.fetch;
+window.fetch = async function(input: RequestInfo | URL, init?: RequestInit) {
+  if (init?.method === 'OPTIONS') {
+    return new Response(null, {
+      status: 204,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Max-Age': '86400'
+      }
+    });
+  }
+  return originalFetch(input, init);
+};
+
 const Chat: React.FC = () => {
   const { language } = useLanguage();
   const t = translations[language];
@@ -57,11 +74,16 @@ const Chat: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://criadordigital-n8n-webhook.ybpoeo.easypanel.host/webhook/d0f82e00-cc20-4ac5-973e-f2ef155bc3de/chat', {
+      const response = await fetch('https://n8n-webhook.ybpoeo.easypanel.host/webhook/020db69f-901b-4f90-aa26-1162cb551315/chat', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'POST, OPTIONS',
+          'Access-Control-Allow-Headers': 'Content-Type'
         },
+        mode: 'cors',
+        credentials: 'include',
         body: JSON.stringify({
           chatInput: inputValue,
           sessionId: sessionId.current
