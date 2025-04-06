@@ -3,6 +3,7 @@ import './HomePage.css';
 import { translations } from '../translations';
 import { useLanguage } from '../context/LanguageContext';
 import LanguageSwitcher from './LanguageSwitcher';
+import Chat from './Chat';
 
 const HomePage: React.FC = () => {
   const { language } = useLanguage();
@@ -70,6 +71,9 @@ const HomePage: React.FC = () => {
         <p>{t.cta.description}</p>
         <button className="cta-button">{t.cta.button}</button>
       </section>
+
+      {/* Chat Widget */}
+      <Chat />
     </div>
   );
 };

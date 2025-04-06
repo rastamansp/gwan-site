@@ -6,6 +6,16 @@ export const translations = {
       description: "Leveraging AI-powered development to deliver exceptional API integration solutions",
       cta: "Let's Connect"
     },
+    chat: {
+      title: "Hi there! 👋",
+      subtitle: "Start a chat. We're here to help you 24/7.",
+      footer: "",
+      getStarted: "New Conversation",
+      placeholder: "Type your question..",
+      welcome1: "Hi there! 👋",
+      welcome2: "My name is Nathan. How can I assist you today?",
+      error: "Something went wrong. Please try again."
+    },
     features: {
       title: "Why Choose Gwan",
       items: [
@@ -83,6 +93,16 @@ export const translations = {
       subtitle: "Um Desenvolvedor, Possibilidades Infinitas",
       description: "Utilizando desenvolvimento com IA para entregar soluções excepcionais de integração de APIs",
       cta: "Vamos Conectar"
+    },
+    chat: {
+      title: "Olá! 👋",
+      subtitle: "Inicie uma conversa. Estamos aqui para ajudar 24/7.",
+      footer: "",
+      getStarted: "Nova Conversa",
+      placeholder: "Digite sua pergunta..",
+      welcome1: "Olá! 👋",
+      welcome2: "Meu nome é Nathan. Como posso ajudar você hoje?",
+      error: "Algo deu errado. Por favor, tente novamente."
     },
     features: {
       title: "Por que Escolher a Gwan",
