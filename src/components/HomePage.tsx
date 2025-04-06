@@ -22,6 +22,20 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
+      {/* Products Section */}
+      <section className="products">
+        <h2>{t.products.title}</h2>
+        <div className="products-grid">
+          {t.products.items.map((product, index) => (
+            <div key={index} className="product-card">
+              <div className="product-icon">{product.icon}</div>
+              <h3>{product.title}</h3>
+              <p>{product.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Features Section */}
       <section className="features">
         <h2>{t.features.title}</h2>

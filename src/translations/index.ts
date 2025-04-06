@@ -31,6 +31,26 @@ export const translations = {
         }
       ]
     },
+    products: {
+      title: "Our Products",
+      items: [
+        {
+          icon: "🏥",
+          title: "Health Chatbot",
+          description: "A Tough Chatbot from Amazonia who can teach and help to heal all diseases from the 21st century."
+        },
+        {
+          icon: "🎵",
+          title: "Booker Chatbot",
+          description: "A booker to talk with contractors to promote singers and bands."
+        },
+        {
+          icon: "📚",
+          title: "Knowledge Chatbot",
+          description: "Upload your knowledge base in a Google Drive folder and talk to your data using Artificial Intelligence."
+        }
+      ]
+    },
     approach: {
       title: "Our Approach",
       steps: [
@@ -86,6 +106,26 @@ export const translations = {
           icon: "💡",
           title: "Inovação",
           description: "Stack tecnológica moderna com integração de IA"
+        }
+      ]
+    },
+    products: {
+      title: "Nossos Produtos",
+      items: [
+        {
+          icon: "🏥",
+          title: "Chatbot de Saúde",
+          description: "Um Chatbot Resistente da Amazônia que pode ensinar e ajudar a curar todas as doenças do século XXI."
+        },
+        {
+          icon: "🎵",
+          title: "Chatbot Booker",
+          description: "Um booker para conversar com contratantes e promover cantores e bandas."
+        },
+        {
+          icon: "📚",
+          title: "Chatbot de Conhecimento",
+          description: "Faça upload da sua base de conhecimento em uma pasta do Google Drive e converse com seus dados usando Inteligência Artificial."
         }
       ]
     },
