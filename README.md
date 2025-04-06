@@ -1,46 +1,91 @@
-# Getting Started with Create React App
+# Gwan Company Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, bilingual (PT/EN) website for Gwan Company, built with React and TypeScript.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- 🌐 Bilingual support (Portuguese/English)
+- 🎨 Modern, responsive design
+- 🚀 Optimized for production
+- 🔄 Automated CI/CD pipeline
 
-### `npm start`
+## Development
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```bash
+# Install dependencies
+npm install
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Start development server
+npm start
+```
 
-### `npm test`
+## Deployment
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+1. A VPS with:
+   - Docker installed
+   - Git installed
+   - SSH access configured
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. GitHub repository secrets:
+   - `SSH_PRIVATE_KEY`: Your SSH private key for VPS access
+   - `VPS_HOST`: Your VPS hostname or IP
+   - `VPS_USER`: SSH username for your VPS
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Initial VPS Setup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. SSH into your VPS
+2. Create deployment directory:
+   ```bash
+   mkdir -p /var/www/gwan-site
+   cd /var/www/gwan-site
+   ```
+3. Clone the repository:
+   ```bash
+   git clone https://github.com/rastamansp/gwan-site.git .
+   ```
+4. Make deployment script executable:
+   ```bash
+   chmod +x deploy.sh
+   ```
+5. Run initial deployment:
+   ```bash
+   ./deploy.sh
+   ```
 
-### `npm run eject`
+### CI/CD Setup
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Go to your GitHub repository settings
+2. Navigate to "Secrets and variables" > "Actions"
+3. Add the following secrets:
+   - `SSH_PRIVATE_KEY`: Your SSH private key
+   - `VPS_HOST`: Your VPS hostname or IP
+   - `VPS_USER`: SSH username for your VPS
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The CI/CD pipeline will automatically:
+- Deploy on every push to main branch
+- Pull latest changes
+- Rebuild and restart the container
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Manual Deployment
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+If you need to deploy manually:
 
-## Learn More
+```bash
+# SSH into your VPS
+ssh user@your-vps
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Navigate to project directory
+cd /var/www/gwan-site
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Pull latest changes
+git pull origin main
+
+# Run deployment script
+./deploy.sh
+```
+
+## License
+
+MIT
