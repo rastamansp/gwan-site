@@ -97,10 +97,11 @@ const Chat: React.FC = () => {
       
       const botMessage: Message = {
         id: Date.now().toString(),
-        text: data.response || 'Sorry, I could not process your request.',
+        text: data.output || 'Sorry, I could not process your request.',
         sender: 'bot',
         timestamp: new Date()
       };
+
 
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
