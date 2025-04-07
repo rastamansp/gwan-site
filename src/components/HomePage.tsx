@@ -27,21 +27,13 @@ const HomePage: React.FC = () => {
       <section className="products">
         <h2>{t.products.title}</h2>
         <div className="products-grid">
-          <div className="product-card">
-            <h3>{t.products.chatbot1.title}</h3>
-            <p>{t.products.chatbot1.description}</p>
-            <a href="/chat/chatbot1" className="product-link">{t.products.tryNow}</a>
-          </div>
-          <div className="product-card">
-            <h3>{t.products.chatbot2.title}</h3>
-            <p>{t.products.chatbot2.description}</p>
-            <a href="/chat/chatbot2" className="product-link">{t.products.tryNow}</a>
-          </div>
-          <div className="product-card">
-            <h3>{t.products.chatbot3.title}</h3>
-            <p>{t.products.chatbot3.description}</p>
-            <a href="/chat/chatbot3" className="product-link">{t.products.tryNow}</a>
-          </div>
+          {t.products.items.map((product) => (
+            <div key={product.id} className="product-card">
+              <h3>{product.title}</h3>
+              <p>{product.description}</p>
+              <a href={`/chat/${product.id}`} className="product-link">{t.products.tryNow}</a>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -59,18 +51,10 @@ const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section className="how-it-works">
+      {/* Approach Section */}
+      <section className="approach">
         <h2>{t.approach.title}</h2>
-        <div className="steps">
-          {t.approach.steps.map((step, index) => (
-            <div key={index} className="step">
-              <div className="step-number">{step.number}</div>
-              <h3>{step.title}</h3>
-              <p>{step.description}</p>
-            </div>
-          ))}
-        </div>
+        <p>{t.approach.description}</p>
       </section>
 
       {/* CTA Section */}

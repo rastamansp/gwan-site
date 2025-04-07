@@ -44,18 +44,23 @@ export const translations = {
     products: {
       title: "Our Products",
       tryNow: "Try Now",
-      chatbot1: {
-        title: "Health Chatbot",
-        description: "A Tough Chatbot from Amazonia who can teach and help to heal all diseases from the 21st century."
-      },
-      chatbot2: {
-        title: "Booker Chatbot",
-        description: "A Booker Chatbot who can help you to book appointments and manage your schedule."
-      },
-      chatbot3: {
-        title: "Knowledge Chatbot",
-        description: "A Knowledge Chatbot who can help you to learn and understand complex topics."
-      }
+      items: [
+        {
+          id: "chatbot1",
+          title: "Health Chatbot",
+          description: "A Tough Chatbot from Amazonia who can teach and help to heal all diseases from the 21st century."
+        },
+        {
+          id: "chatbot2",
+          title: "Booker Chatbot",
+          description: "A Booker Chatbot who can help you to book appointments and manage your schedule."
+        },
+        {
+          id: "chatbot3",
+          title: "Knowledge Chatbot",
+          description: "A Knowledge Chatbot who can help you to learn and understand complex topics."
+        }
+      ]
     },
     approach: {
       title: "Our Approach",
@@ -115,18 +120,23 @@ export const translations = {
     products: {
       title: "Nossos Produtos",
       tryNow: "Experimente Agora",
-      chatbot1: {
-        title: "Chatbot de Saúde",
-        description: "Um Chatbot Resistente da Amazônia que pode ensinar e ajudar a curar todas as doenças do século 21."
-      },
-      chatbot2: {
-        title: "Chatbot de Agendamento",
-        description: "Um Chatbot de Agendamento que pode ajudar você a marcar compromissos e gerenciar sua agenda."
-      },
-      chatbot3: {
-        title: "Chatbot de Conhecimento",
-        description: "Um Chatbot de Conhecimento que pode ajudar você a aprender e entender tópicos complexos."
-      }
+      items: [
+        {
+          id: "chatbot1",
+          title: "Chatbot de Saúde",
+          description: "Um Chatbot Resistente da Amazônia que pode ensinar e ajudar a curar todas as doenças do século 21."
+        },
+        {
+          id: "chatbot2",
+          title: "Chatbot de Agendamento",
+          description: "Um Chatbot de Agendamento que pode ajudar você a marcar compromissos e gerenciar sua agenda."
+        },
+        {
+          id: "chatbot3",
+          title: "Chatbot de Conhecimento",
+          description: "Um Chatbot de Conhecimento que pode ajudar você a aprender e entender tópicos complexos."
+        }
+      ]
     },
     approach: {
       title: "Nossa Abordagem",

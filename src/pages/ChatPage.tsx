@@ -7,26 +7,12 @@ const ChatPage: React.FC = () => {
   const { language } = useLanguage();
   const t = translations[language];
 
-  const products = [
-    {
-      id: 'chatbot1',
-      title: t.products.chatbot1.title,
-      description: t.products.chatbot1.description,
-      link: '/chat/chatbot1'
-    },
-    {
-      id: 'chatbot2',
-      title: t.products.chatbot2.title,
-      description: t.products.chatbot2.description,
-      link: '/chat/chatbot2'
-    },
-    {
-      id: 'chatbot3',
-      title: t.products.chatbot3.title,
-      description: t.products.chatbot3.description,
-      link: '/chat/chatbot3'
-    }
-  ];
+  const products = t.products.items.map(item => ({
+    id: item.id,
+    title: item.title,
+    description: item.description,
+    link: `/chat/${item.id}`
+  }));
 
   return (
     <div className="chat-page">
