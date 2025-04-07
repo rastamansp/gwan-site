@@ -6,12 +6,17 @@ import './Footer.css';
 const Footer: React.FC = () => {
   const { language } = useLanguage();
   const t = translations[language];
+  const version = process.env.REACT_APP_VERSION || '1.0.0';
 
   return (
     <footer className="footer">
       <div className="footer-content">
-        <p>{t.footer.copyright}</p>
-        <p className="version">v{process.env.REACT_APP_VERSION || '0.1.1'}</p>
+        <p className="footer-text">
+          {t.footer.copyright}
+        </p>
+        <p className="footer-version">
+          v{version}
+        </p>
       </div>
     </footer>
   );
