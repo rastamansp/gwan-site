@@ -53,8 +53,10 @@ const HomePage: React.FC = () => {
 
       {/* Approach Section */}
       <section className="approach">
-        <h2>{t.approach.title}</h2>
-        <p>{t.approach.description}</p>
+        <div className="approach-content">
+          <h2>{t.approach.title}</h2>
+          <p className="approach-description">{t.approach.description}</p>
+        </div>
       </section>
 
       {/* CTA Section */}

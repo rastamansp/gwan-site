@@ -228,4 +228,45 @@
 .product-card p {
   color: #666;
   line-height: 1.6;
+}
+
+/* Approach Section */
+.approach {
+  padding: 4rem 2rem;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.approach-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.approach h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.approach-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .approach {
+    padding: 3rem 1rem;
+  }
+
+  .approach h2 {
+    font-size: 2rem;
+  }
+
+  .approach-description {
+    font-size: 1.1rem;
+    padding: 0 1rem;
+  }
 } 
