@@ -96,24 +96,24 @@ export const translations = {
       title: "Por que Escolher a Gwan",
       items: [
         {
-          icon: "🤖",
-          title: "Powered by IA",
-          description: "Desenvolvimento aprimorado com ferramentas de IA de ponta"
+          icon: "🤝",
+          title: "Parceria",
+          description: "Trabalhamos lado a lado com você para entender suas necessidades"
         },
         {
-          icon: "⚡",
-          title: "Super Rápido",
-          description: "Ciclos rápidos de desenvolvimento e implantação"
+          icon: "🚀",
+          title: "Rápido e Eficiente",
+          description: "Desenvolvimento ágil com entregas rápidas e de qualidade"
         },
         {
-          icon: "🎯",
-          title: "Precisão",
-          description: "Soluções focadas e de alta qualidade"
+          icon: "💎",
+          title: "Qualidade Garantida",
+          description: "Código limpo, testado e pronto para produção"
         },
         {
-          icon: "💡",
-          title: "Inovação",
-          description: "Stack tecnológico moderno com integração de IA"
+          icon: "🎨",
+          title: "Design Moderno",
+          description: "Interfaces bonitas e fáceis de usar"
         }
       ]
     },
