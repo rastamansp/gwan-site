@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../translations';
 import Chat from '../components/Chat';
@@ -16,51 +16,56 @@ const ChatbotPage: React.FC = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const { chatbotId } = useParams<{ chatbotId: string }>();
+  const navigate = useNavigate();
+
+  const chatbotFeatures = {
+    chatbot1: {
+      features: [
+        'General health information',
+        'Wellness tips',
+        'Healthy lifestyle recommendations',
+        'Basic medical guidance'
+      ],
+      disclaimer: 'Please note that this chatbot is for informational purposes only and should not replace professional medical advice.'
+    },
+    chatbot2: {
+      features: [
+        'Scheduling appointments',
+        'Managing bookings',
+        'Rescheduling or canceling appointments',
+        'Providing availability information',
+        'Setting up reminders'
+      ],
+      disclaimer: 'This chatbot integrates with popular calendar systems to provide seamless booking experiences.'
+    },
+    chatbot3: {
+      features: [
+        'Answering general knowledge questions',
+        'Providing educational content',
+        'Explaining complex topics',
+        'Offering learning resources',
+        'Supporting research and study'
+      ],
+      disclaimer: 'This chatbot is designed to enhance your learning experience and provide accurate information.'
+    }
+  };
 
   // Get the specific chatbot data based on the URL parameter
   const getChatbotData = (): ChatbotData | null => {
-    switch (chatbotId) {
-      case 'chatbot1':
-        return {
-          title: t.products.chatbot1.title,
-          description: t.products.chatbot1.description,
-          features: [
-            'General health information',
-            'Wellness tips',
-            'Healthy lifestyle recommendations',
-            'Basic medical guidance'
-          ],
-          disclaimer: 'Please note that this chatbot is for informational purposes only and should not replace professional medical advice.'
-        };
-      case 'chatbot2':
-        return {
-          title: t.products.chatbot2.title,
-          description: t.products.chatbot2.description,
-          features: [
-            'Scheduling appointments',
-            'Managing bookings',
-            'Rescheduling or canceling appointments',
-            'Providing availability information',
-            'Setting up reminders'
-          ],
-          disclaimer: 'This chatbot integrates with popular calendar systems to provide seamless booking experiences.'
-        };
-      case 'chatbot3':
-        return {
-          title: t.products.chatbot3.title,
-          description: t.products.chatbot3.description,
-          features: [
-            'Answering general knowledge questions',
-            'Providing educational content',
-            'Explaining complex topics',
-            'Offering learning resources',
-            'Supporting research and study'
-          ],
-          disclaimer: 'This chatbot is designed to enhance your learning experience and provide accurate information.'
-        };
-      default:
-        return null;
-    }
+    if (!chatbotId) return null;
+    
+    const chatbot = t.products.items.find(item => item.id === chatbotId);
+    if (!chatbot) return null;
+
+    const features = chatbotFeatures[chatbotId as keyof typeof chatbotFeatures];
+    if (!features) return null;
+
+    return {
+      title: chatbot.title,
+      description: chatbot.description,
+      features: features.features,
+      disclaimer: features.disclaimer
+    };
   };
 
   const chatbotData = getChatbotData();
@@ -72,6 +77,9 @@ const ChatbotPage: React.FC = () => {
   return (
     <div className="chatbot-page">
       <div className="chatbot-header">
+        <button className="back-button" onClick={() => navigate('/')}>
+          ← {language === 'en' ? 'Back' : 'Voltar'}
+        </button>
         <h1>{chatbotData.title}</h1>
         <p className="subtitle">{chatbotData.description}</p>
       </div>

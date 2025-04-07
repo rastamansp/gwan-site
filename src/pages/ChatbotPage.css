@@ -6,7 +6,8 @@
 
 .chatbot-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+  position: relative;
 }
 
 .chatbot-header h1 {
@@ -17,6 +18,26 @@
 .chatbot-header .subtitle {
   color: #666;
   font-size: 1.2rem;
+}
+
+.back-button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: none;
+  border: none;
+  color: #007bff;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s;
+}
+
+.back-button:hover {
+  color: #0056b3;
 }
 
 .chatbot-content {
