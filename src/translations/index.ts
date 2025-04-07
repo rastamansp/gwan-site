@@ -13,7 +13,7 @@ export const translations = {
       getStarted: "New Conversation",
       placeholder: "Type your question..",
       welcome1: "Hi there! 👋",
-      welcome2: "My name is Nathan. How can I assist you today?",
+      welcome2: "My name is Gwan Bot. How can I assist you today?",
       error: "Something went wrong. Please try again."
     },
     features: {
