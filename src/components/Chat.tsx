@@ -78,16 +78,15 @@ const Chat: React.FC = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': 'true',
+          'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'POST, OPTIONS',
           'Access-Control-Allow-Headers': 'Content-Type'
         },
-        mode: 'cors',
-        credentials: 'include',
         body: JSON.stringify({
           chatInput: inputValue,
           sessionId: sessionId.current
-        })
+        }),
+        mode: 'cors'
       });
 
       if (!response.ok) {
