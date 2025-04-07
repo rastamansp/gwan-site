@@ -43,55 +43,38 @@ export const translations = {
     },
     products: {
       title: "Our Products",
-      items: [
-        {
-          icon: "🏥",
-          title: "Health Chatbot",
-          description: "A Tough Chatbot from Amazonia who can teach and help to heal all diseases from the 21st century."
-        },
-        {
-          icon: "🎵",
-          title: "Booker Chatbot",
-          description: "A booker to talk with contractors to promote singers and bands."
-        },
-        {
-          icon: "📚",
-          title: "Knowledge Chatbot",
-          description: "Upload your knowledge base in a Google Drive folder and talk to your data using Artificial Intelligence."
-        }
-      ]
+      tryNow: "Try Now",
+      chatbot1: {
+        title: "Health Chatbot",
+        description: "A Tough Chatbot from Amazonia who can teach and help to heal all diseases from the 21st century."
+      },
+      chatbot2: {
+        title: "Booker Chatbot",
+        description: "A Booker Chatbot who can help you to book appointments and manage your schedule."
+      },
+      chatbot3: {
+        title: "Knowledge Chatbot",
+        description: "A Knowledge Chatbot who can help you to learn and understand complex topics."
+      }
     },
     approach: {
       title: "Our Approach",
-      steps: [
-        {
-          number: "1",
-          title: "Understand",
-          description: "Deep dive into your API integration needs"
-        },
-        {
-          number: "2",
-          title: "Develop",
-          description: "AI-enhanced development for optimal solutions"
-        },
-        {
-          number: "3",
-          title: "Deliver",
-          description: "Efficient, scalable integration solutions"
-        }
-      ]
+      description: "We combine technical expertise with creative problem-solving to deliver solutions that drive business growth."
     },
     cta: {
-      title: "Ready to Transform Your API Integration?",
-      description: "Let's build something amazing together",
-      button: "Start a Project"
+      title: "Ready to Get Started?",
+      description: "Let's discuss how we can help you achieve your goals.",
+      button: "Contact Us"
+    },
+    footer: {
+      copyright: "© 2024 Gwan Company. All rights reserved."
     }
   },
   pt: {
     hero: {
       title: "Gwan Company",
       subtitle: "Um Desenvolvedor, Possibilidades Infinitas",
-      description: "Utilizando desenvolvimento com IA para entregar soluções excepcionais de integração de APIs",
+      description: "Utilizando desenvolvimento com IA para entregar soluções excepcionais de integração de API",
       cta: "Vamos Conectar"
     },
     chat: {
@@ -109,7 +92,7 @@ export const translations = {
       items: [
         {
           icon: "🤖",
-          title: "Potencializado por IA",
+          title: "Powered by IA",
           description: "Desenvolvimento aprimorado com ferramentas de IA de ponta"
         },
         {
@@ -125,54 +108,37 @@ export const translations = {
         {
           icon: "💡",
           title: "Inovação",
-          description: "Stack tecnológica moderna com integração de IA"
+          description: "Stack tecnológico moderno com integração de IA"
         }
       ]
     },
     products: {
       title: "Nossos Produtos",
-      items: [
-        {
-          icon: "🏥",
-          title: "Chatbot de Saúde",
-          description: "Um Chatbot Resistente da Amazônia que pode ensinar e ajudar a curar todas as doenças do século XXI."
-        },
-        {
-          icon: "🎵",
-          title: "Chatbot Booker",
-          description: "Um booker para conversar com contratantes e promover cantores e bandas."
-        },
-        {
-          icon: "📚",
-          title: "Chatbot de Conhecimento",
-          description: "Faça upload da sua base de conhecimento em uma pasta do Google Drive e converse com seus dados usando Inteligência Artificial."
-        }
-      ]
+      tryNow: "Experimente Agora",
+      chatbot1: {
+        title: "Chatbot de Saúde",
+        description: "Um Chatbot Resistente da Amazônia que pode ensinar e ajudar a curar todas as doenças do século 21."
+      },
+      chatbot2: {
+        title: "Chatbot de Agendamento",
+        description: "Um Chatbot de Agendamento que pode ajudar você a marcar compromissos e gerenciar sua agenda."
+      },
+      chatbot3: {
+        title: "Chatbot de Conhecimento",
+        description: "Um Chatbot de Conhecimento que pode ajudar você a aprender e entender tópicos complexos."
+      }
     },
     approach: {
       title: "Nossa Abordagem",
-      steps: [
-        {
-          number: "1",
-          title: "Entender",
-          description: "Análise profunda das suas necessidades de integração de API"
-        },
-        {
-          number: "2",
-          title: "Desenvolver",
-          description: "Desenvolvimento aprimorado por IA para soluções otimizadas"
-        },
-        {
-          number: "3",
-          title: "Entregar",
-          description: "Soluções de integração eficientes e escaláveis"
-        }
-      ]
+      description: "Combinamos expertise técnica com resolução criativa de problemas para entregar soluções que impulsionam o crescimento dos negócios."
     },
     cta: {
-      title: "Pronto para Transformar sua Integração de API?",
-      description: "Vamos construir algo incrível juntos",
-      button: "Iniciar Projeto"
+      title: "Pronto para Começar?",
+      description: "Vamos discutir como podemos ajudar você a alcançar seus objetivos.",
+      button: "Entre em Contato"
+    },
+    footer: {
+      copyright: "© 2024 Gwan Company. Todos os direitos reservados."
     }
   }
 }; 

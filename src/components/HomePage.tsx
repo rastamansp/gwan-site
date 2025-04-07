@@ -27,13 +27,21 @@ const HomePage: React.FC = () => {
       <section className="products">
         <h2>{t.products.title}</h2>
         <div className="products-grid">
-          {t.products.items.map((product, index) => (
-            <div key={index} className="product-card">
-              <div className="product-icon">{product.icon}</div>
-              <h3>{product.title}</h3>
-              <p>{product.description}</p>
-            </div>
-          ))}
+          <div className="product-card">
+            <h3>{t.products.chatbot1.title}</h3>
+            <p>{t.products.chatbot1.description}</p>
+            <a href="/chat/chatbot1" className="product-link">{t.products.tryNow}</a>
+          </div>
+          <div className="product-card">
+            <h3>{t.products.chatbot2.title}</h3>
+            <p>{t.products.chatbot2.description}</p>
+            <a href="/chat/chatbot2" className="product-link">{t.products.tryNow}</a>
+          </div>
+          <div className="product-card">
+            <h3>{t.products.chatbot3.title}</h3>
+            <p>{t.products.chatbot3.description}</p>
+            <a href="/chat/chatbot3" className="product-link">{t.products.tryNow}</a>
+          </div>
         </div>
       </section>
 
