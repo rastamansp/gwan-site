@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  gwan-site:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gwan-site
+    ports:
+      - "80:80"
+    restart: unless-stopped
+    networks:
+      - gwan-network
+
+networks:
+  gwan-network:
+    driver: bridge 
