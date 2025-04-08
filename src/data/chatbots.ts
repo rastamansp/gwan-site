@@ -8,7 +8,10 @@ export interface Chatbot {
     en: string;
     pt: string;
   };
-  features: string[];
+  features: {
+    en: string;
+    pt: string;
+  }[];
   disclaimer: {
     en: string;
     pt: string;
@@ -38,10 +41,22 @@ export const chatbots: Chatbot[] = [
       pt: 'Obtenha informações de saúde instantâneas e dicas de bem-estar do nosso assistente de saúde com IA.'
     },
     features: [
-      'General health information',
-      'Wellness tips',
-      'Healthy lifestyle recommendations',
-      'Basic medical guidance'
+      {
+        en: 'General health information',
+        pt: 'Informações gerais de saúde'
+      },
+      {
+        en: 'Wellness tips',
+        pt: 'Dicas de bem-estar'
+      },
+      {
+        en: 'Healthy lifestyle recommendations',
+        pt: 'Recomendações de estilo de vida saudável'
+      },
+      {
+        en: 'Basic medical guidance',
+        pt: 'Orientação médica básica'
+      }
     ],
     disclaimer: {
       en: 'Please note that this chatbot is for informational purposes only and should not replace professional medical advice.',
@@ -70,11 +85,26 @@ export const chatbots: Chatbot[] = [
       pt: 'Gerencie eficientemente seus compromissos e agendamentos com nosso assistente de agendamento inteligente.'
     },
     features: [
-      'Scheduling appointments',
-      'Managing bookings',
-      'Rescheduling or canceling appointments',
-      'Providing availability information',
-      'Setting up reminders'
+      {
+        en: 'Scheduling appointments',
+        pt: 'Agendamento de compromissos'
+      },
+      {
+        en: 'Managing bookings',
+        pt: 'Gerenciamento de reservas'
+      },
+      {
+        en: 'Rescheduling or canceling appointments',
+        pt: 'Reagendamento ou cancelamento de compromissos'
+      },
+      {
+        en: 'Providing availability information',
+        pt: 'Fornecimento de informações de disponibilidade'
+      },
+      {
+        en: 'Setting up reminders',
+        pt: 'Configuração de lembretes'
+      }
     ],
     disclaimer: {
       en: 'This chatbot integrates with popular calendar systems to provide seamless booking experiences.',
@@ -103,11 +133,26 @@ export const chatbots: Chatbot[] = [
       pt: 'Acesse uma riqueza de informações e aprenda coisas novas com nosso assistente de IA experiente.'
     },
     features: [
-      'Answering general knowledge questions',
-      'Providing educational content',
-      'Explaining complex topics',
-      'Offering learning resources',
-      'Supporting research and study'
+      {
+        en: 'Answering general knowledge questions',
+        pt: 'Respondendo perguntas de conhecimento geral'
+      },
+      {
+        en: 'Providing educational content',
+        pt: 'Fornecendo conteúdo educacional'
+      },
+      {
+        en: 'Explaining complex topics',
+        pt: 'Explicando tópicos complexos'
+      },
+      {
+        en: 'Offering learning resources',
+        pt: 'Oferecendo recursos de aprendizado'
+      },
+      {
+        en: 'Supporting research and study',
+        pt: 'Apoiando pesquisa e estudo'
+      }
     ],
     disclaimer: {
       en: 'This chatbot is designed to enhance your learning experience and provide accurate information.',

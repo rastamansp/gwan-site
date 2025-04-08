@@ -49,7 +49,7 @@ const HomePage: React.FC = () => {
               <Button 
                 variant="primary" 
                 size="lg" 
-                onClick={() => handleTryNow('Jaiminho')}
+                href="https://webhook.gwan.com.br/form/98bcf216-c30d-4bc1-88b1-e4de524efd99"
                 className="px-4"
               >
                 {t.hero.cta}
@@ -163,7 +163,7 @@ const HomePage: React.FC = () => {
               <Button 
                 variant="light" 
                 size="lg" 
-                onClick={() => handleTryNow('Jaiminho')}
+                href="https://webhook.gwan.com.br/form/98bcf216-c30d-4bc1-88b1-e4de524efd99"
                 className="px-5 py-3 rounded-pill"
               >
                 {t.cta.button}
