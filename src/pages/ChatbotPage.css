@@ -40,6 +40,30 @@
   color: #0056b3;
 }
 
+.chatbot-selector {
+  margin: 1rem 0;
+}
+
+.chatbot-dropdown {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.chatbot-dropdown:hover {
+  border-color: #007bff;
+}
+
+.chatbot-dropdown:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
 .chatbot-content {
   display: grid;
   grid-template-columns: 1fr 2fr;

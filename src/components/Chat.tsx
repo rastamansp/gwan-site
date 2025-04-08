@@ -1,7 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { translations } from '../translations';
+import { chatbots } from '../data/chatbots';
 import './Chat.css';
+
+interface ChatProps {
+  chatbotId?: string;
+}
 
 interface Message {
   id: string;
@@ -27,9 +31,8 @@ window.fetch = async function(input: RequestInfo | URL, init?: RequestInit) {
   return originalFetch(input, init);
 };
 
-const Chat: React.FC = () => {
+const Chat: React.FC<ChatProps> = ({ chatbotId = 'Jaiminho' }) => {
   const { language } = useLanguage();
-  const t = translations[language];
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isOpen, setIsOpen] = useState(false);
@@ -37,30 +40,42 @@ const Chat: React.FC = () => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const sessionId = useRef(`session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
 
+  // Get chatbot data
+  const chatbot = chatbots.find(c => c.id === chatbotId);
+
+  // Reset session ID and messages when chatbot changes
   useEffect(() => {
-    // Add welcome messages
-    setMessages([
-      {
-        id: '1',
-        text: t.chat.welcome1,
-        sender: 'bot',
-        timestamp: new Date()
-      },
-      {
-        id: '2',
-        text: t.chat.welcome2,
-        sender: 'bot',
-        timestamp: new Date()
-      }
-    ]);
-  }, [t.chat.welcome1, t.chat.welcome2]);
+    sessionId.current = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    setMessages([]);
+  }, [chatbotId]);
+
+  // Add welcome messages when messages array is empty
+  useEffect(() => {
+    if (messages.length === 0 && chatbot) {
+      const welcomeMessages: Message[] = [
+        {
+          id: '1',
+          text: chatbot.messages.welcome[language],
+          sender: 'bot' as const,
+          timestamp: new Date()
+        },
+        {
+          id: '2',
+          text: chatbot.messages.initial[language],
+          sender: 'bot' as const,
+          timestamp: new Date()
+        }
+      ];
+      setMessages(welcomeMessages);
+    }
+  }, [language, messages.length, chatbot]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   const handleSendMessage = async () => {
-    if (!inputValue.trim()) return;
+    if (!inputValue.trim() || !chatbot) return;
 
     const userMessage: Message = {
       id: Date.now().toString(),
@@ -74,7 +89,7 @@ const Chat: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('https://webhook.gwan.com.br/webhook/020db69f-901b-4f90-aa26-1162cb551315/chat', {
+      const response = await fetch(chatbot.url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -102,7 +117,6 @@ const Chat: React.FC = () => {
         timestamp: new Date()
       };
 
-
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
       console.error('Error sending message:', error);
@@ -127,38 +141,45 @@ const Chat: React.FC = () => {
       {isOpen && (
         <div className="chat-window">
           <div className="chat-header">
-            <h3>{t.chat.title}</h3>
-            <p>{t.chat.subtitle}</p>
+            <h3>{chatbot?.title[language]}</h3>
+            <p>{chatbot?.description[language]}</p>
           </div>
           
           <div className="chat-messages">
-            {messages.map(message => (
+            {messages.map((message) => (
               <div key={message.id} className={`message ${message.sender}`}>
                 <div className="message-content">
-                  {message.text}
-                </div>
-                <div className="message-time">
-                  {message.timestamp.toLocaleTimeString()}
+                  <p>{message.text}</p>
+                  <span className="message-time">
+                    {message.timestamp.toLocaleTimeString()}
+                  </span>
                 </div>
               </div>
             ))}
+            {isLoading && (
+              <div className="message bot">
+                <div className="message-content">
+                  <p>...</p>
+                </div>
+              </div>
+            )}
             <div ref={messagesEndRef} />
           </div>
-
-          <div className="chat-input-container">
+          
+          <div className="chat-input">
             <input
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-              placeholder={t.chat.placeholder}
+              placeholder={language === 'en' ? 'Type your message...' : 'Digite sua mensagem...'}
               disabled={isLoading}
             />
             <button 
               onClick={handleSendMessage}
               disabled={isLoading || !inputValue.trim()}
             >
-              {isLoading ? '...' : 'Send'}
+              {isLoading ? '...' : '→'}
             </button>
           </div>
         </div>
