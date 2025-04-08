@@ -1,0 +1,58 @@
+// Custom variables
+$primary: #1a365d;
+$secondary: #2d3748;
+$success: #4299e1;
+$info: #3182ce;
+$light: #f8f9fa;
+$dark: #2c3e50;
+
+// Import Bootstrap
+@import "bootstrap/scss/bootstrap";
+
+// Custom styles
+.navbar {
+  background-color: $primary;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hero {
+  background: linear-gradient(135deg, $primary 0%, $secondary 100%);
+  color: white;
+}
+
+.feature-card {
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, $success 0%, $info 100%);
+  border: none;
+  
+  &:hover {
+    background: linear-gradient(135deg, $info 0%, darken($info, 10%) 100%);
+  }
+}
+
+// Custom utility classes
+.rounded-xl {
+  border-radius: 1rem;
+}
+
+.shadow-soft {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .display-4 {
+    font-size: 2.5rem;
+  }
+  
+  .lead {
+    font-size: 1.1rem;
+  }
+} 
