@@ -8,7 +8,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Accordion from 'react-bootstrap/Accordion';
 import './ChatbotPage.css';
 
 const ChatbotPage: React.FC = () => {
@@ -16,8 +15,10 @@ const ChatbotPage: React.FC = () => {
   const { chatbotId } = useParams<{ chatbotId: string }>();
   const navigate = useNavigate();
   const [chatKey, setChatKey] = useState(Date.now());
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleChatbotChange = (newChatbotId: string) => {
+    setIsOpen(false);
     navigate(`/chat/${newChatbotId}`);
     setChatKey(Date.now());
   };
@@ -108,6 +109,35 @@ const ChatbotPage: React.FC = () => {
           </Col>
           
           <Col lg={6}>
+            <Card className="cta-section">
+              <Card.Body>
+                <h2 className="mb-4">
+                  {language === 'en' 
+                    ? 'Try it now!' 
+                    : 'Experimente agora!'}
+                </h2>
+                <p className="mb-4">
+                  {language === 'en'
+                    ? 'Start a conversation with our chatbot to get instant help.'
+                    : 'Inicie uma conversa com nosso chatbot para obter ajuda instantânea.'}
+                </p>
+                <div className="d-flex justify-content-center">
+                  <Button 
+                    variant="primary" 
+                    size="lg"
+                    onClick={() => setIsOpen(true)}
+                    className="px-4"
+                  >
+                    {language === 'en' ? 'Start Chat' : 'Iniciar Chat'}
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+
+        <Row className="mt-4">
+          <Col>
             <Card className="faq-section">
               <Card.Body>
                 <h2>{language === 'en' ? 'Frequently Asked Questions' : 'Perguntas Frequentes'}</h2>
@@ -124,9 +154,8 @@ const ChatbotPage: React.FC = () => {
           </Col>
         </Row>
 
-        <div className="chat-container">
-          <Chat key={chatKey} chatbotId={chatbotId} />
-        </div>
+        {/* Chat Component */}
+        <Chat key={chatKey} chatbotId={chatbotId} isOpen={isOpen} />
       </Container>
     </div>
   );

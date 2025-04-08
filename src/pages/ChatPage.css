@@ -1,7 +1,15 @@
 .chat-page {
-  padding: 4rem 0;
-  background-color: #f8f9fa;
   min-height: 100vh;
+  background-color: #f8f9fa;
+  padding-top: 56px; /* Height of the navbar */
+}
+
+/* Ensure the chat container doesn't overlap with the header */
+.chat-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
 }
 
 .chat-page h1 {

@@ -1,24 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { translations } from '../translations';
 import { useLanguage } from '../context/LanguageContext';
-import LanguageSwitcher from './LanguageSwitcher';
-import Chat from './Chat';
-import { chatbots } from '../data/chatbots';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import './HomePage.css';
 
 const getEmojiIcon = (chatbotId: string) => {
   switch (chatbotId) {
     case 'Jaiminho':
-      return '🏥';
+      return '🌿';
     case 'Empresário':
-      return '📅';
+      return '🎭';
     case 'Gwan':
-      return '📚';
+      return '🏢';
     default:
       return '🤖';
   }
@@ -27,33 +24,49 @@ const getEmojiIcon = (chatbotId: string) => {
 const HomePage: React.FC = () => {
   const { language } = useLanguage();
   const navigate = useNavigate();
-  const t = translations[language];
-  const [chatKey, setChatKey] = useState(Date.now());
 
   const handleTryNow = (chatbotId: string) => {
-    setChatKey(Date.now());
     navigate(`/chat/${chatbotId}`);
   };
 
+  const chatbots = [
+    {
+      id: 'Jaiminho',
+      title: language === 'en' ? 'Jaiminho' : 'Jaiminho',
+      description: language === 'en' 
+        ? 'Your naturopathic doctor, providing information about causes, symptoms, and natural treatments for 21st century diseases.'
+        : 'Seu médico naturopata, fornecendo informações sobre causas, sintomas e tratamentos naturais para doenças do século XXI.'
+    },
+    {
+      id: 'Empresário',
+      title: language === 'en' ? 'Empresário' : 'Empresário',
+      description: language === 'en'
+        ? 'Your virtual artist manager, providing information about available artists and handling booking inquiries.'
+        : 'Seu empresário virtual, fornecendo informações sobre artistas disponíveis e gerenciando consultas de contratação.'
+    },
+    {
+      id: 'Gwan',
+      title: language === 'en' ? 'Gwan' : 'Gwan',
+      description: language === 'en'
+        ? 'Our institutional chatbot, providing information about our company, contact details, partnerships, and our AI chatbot development and technological innovation services.'
+        : 'Nosso chatbot institucional, fornecendo informações sobre a empresa, detalhes de contato, parcerias e serviços de desenvolvimento de Chatbot de IA e inovação tecnológica.'
+    }
+  ];
+
   return (
     <div className="homepage">
-      <LanguageSwitcher />
-      
       <section className="hero py-5">
         <Container>
           <Row className="justify-content-center text-center">
             <Col lg={8}>
-              <h1 className="display-4 fw-bold mb-4">{t.hero.title}</h1>
-              <h2 className="h3 mb-4 text-light">{t.hero.subtitle}</h2>
-              <p className="lead mb-5">{t.hero.description}</p>
-              <Button 
-                variant="primary" 
-                size="lg" 
-                href="https://webhook.gwan.com.br/form/98bcf216-c30d-4bc1-88b1-e4de524efd99"
-                className="px-4"
-              >
-                {t.hero.cta}
-              </Button>
+              <h1 className="display-4 fw-bold mb-4">
+                {language === 'en' ? 'Choose Your AI Assistant' : 'Escolha Seu Assistente de IA'}
+              </h1>
+              <h2 className="h3 mb-4 text-light">
+                {language === 'en' 
+                  ? 'Select the chatbot that best fits your needs'
+                  : 'Selecione o chatbot que melhor atende às suas necessidades'}
+              </h2>
             </Col>
           </Row>
         </Container>
@@ -61,25 +74,23 @@ const HomePage: React.FC = () => {
 
       <section className="products py-5 bg-light">
         <Container>
-          <h2 className="text-center mb-5">{t.products.title}</h2>
+          <h2 className="text-center mb-5">
+            {language === 'en' ? 'Our Products' : 'Nossos Produtos'}
+          </h2>
           <Row className="g-4">
             {chatbots.map((chatbot) => (
-              <Col key={chatbot.id} md={4}>
-                <Card className="h-100 shadow-soft rounded-xl">
+              <Col key={chatbot.id} xs={12} md={4}>
+                <Card className="h-100 product-card">
                   <Card.Body className="d-flex flex-column text-center">
                     <div className="display-1 mb-4">{getEmojiIcon(chatbot.id)}</div>
-                    <Card.Title as="h3" className="mb-3">
-                      {chatbot.title[language]}
-                    </Card.Title>
-                    <Card.Text className="mb-4">
-                      {chatbot.description[language]}
-                    </Card.Text>
+                    <Card.Title className="mb-3">{chatbot.title}</Card.Title>
+                    <Card.Text className="flex-grow-1">{chatbot.description}</Card.Text>
                     <Button 
                       variant="primary" 
-                      onClick={() => handleTryNow(chatbot.id)}
                       className="mt-auto"
+                      onClick={() => handleTryNow(chatbot.id)}
                     >
-                      {t.products.tryNow}
+                      {language === 'en' ? 'Try Now' : 'Experimentar'}
                     </Button>
                   </Card.Body>
                 </Card>
@@ -89,43 +100,88 @@ const HomePage: React.FC = () => {
         </Container>
       </section>
 
+      {/* Why Choose Gwan Section */}
       <section className="features py-5">
         <Container>
-          <h2 className="text-center mb-5">{t.features.title}</h2>
+          <h2 className="text-center mb-5">
+            {language === 'en' ? 'Why Choose Gwan?' : 'Por que Escolher a Gwan?'}
+          </h2>
           <Row className="g-4">
-            {t.features.items.map((feature, index) => (
-              <Col key={index} md={3}>
-                <Card className="h-100 shadow-soft rounded-xl feature-card">
-                  <Card.Body className="text-center">
-                    <div className="display-4 mb-3">{feature.icon}</div>
-                    <Card.Title as="h3" className="h4 mb-3">
-                      {feature.title}
-                    </Card.Title>
-                    <Card.Text>
-                      {feature.description}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
+            <Col md={4}>
+              <Card className="h-100 feature-card">
+                <Card.Body className="text-center">
+                  <div className="display-4 mb-3">🤖</div>
+                  <Card.Title className="h4 mb-3">
+                    {language === 'en' ? 'Advanced AI Technology' : 'Tecnologia de IA Avançada'}
+                  </Card.Title>
+                  <Card.Text>
+                    {language === 'en' 
+                      ? 'State-of-the-art AI models for natural and engaging conversations.'
+                      : 'Modelos de IA de última geração para conversas naturais e envolventes.'}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col md={4}>
+              <Card className="h-100 feature-card">
+                <Card.Body className="text-center">
+                  <div className="display-4 mb-3">⚡</div>
+                  <Card.Title className="h4 mb-3">
+                    {language === 'en' ? 'Fast Implementation' : 'Implementação Rápida'}
+                  </Card.Title>
+                  <Card.Text>
+                    {language === 'en' 
+                      ? 'Quick deployment and easy integration with your existing systems.'
+                      : 'Implantação rápida e fácil integração com seus sistemas existentes.'}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col md={4}>
+              <Card className="h-100 feature-card">
+                <Card.Body className="text-center">
+                  <div className="display-4 mb-3">🛡️</div>
+                  <Card.Title className="h4 mb-3">
+                    {language === 'en' ? 'Secure & Reliable' : 'Seguro e Confiável'}
+                  </Card.Title>
+                  <Card.Text>
+                    {language === 'en' 
+                      ? 'Enterprise-grade security and 24/7 monitoring for your peace of mind.'
+                      : 'Segurança de nível empresarial e monitoramento 24/7 para sua tranquilidade.'}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
           </Row>
         </Container>
       </section>
 
-      {/* Approach Section */}
+      {/* Our Approach Section */}
       <section className="approach py-5 bg-light">
         <Container>
           <Row className="justify-content-center">
             <Col lg={8} className="text-center">
-              <h2 className="display-5 fw-bold mb-4">{t.approach.title}</h2>
-              <p className="lead text-muted mb-5">{t.approach.description}</p>
+              <h2 className="display-5 fw-bold mb-4">
+                {language === 'en' ? 'Our Approach' : 'Nossa Abordagem'}
+              </h2>
+              <p className="lead text-muted mb-5">
+                {language === 'en' 
+                  ? 'We combine cutting-edge technology with a deep understanding of your business needs.'
+                  : 'Combinamos tecnologia de ponta com um profundo entendimento das necessidades do seu negócio.'}
+              </p>
               <Row className="g-4 mt-4">
                 <Col md={4}>
                   <Card className="h-100 border-0 shadow-soft rounded-xl">
                     <Card.Body className="text-center">
                       <div className="display-4 mb-3">🎯</div>
-                      <Card.Title as="h3" className="h5 mb-3">Foco no Cliente</Card.Title>
-                      <Card.Text>Entendemos suas necessidades e entregamos soluções personalizadas.</Card.Text>
+                      <Card.Title className="h5 mb-3">
+                        {language === 'en' ? 'Customer Focus' : 'Foco no Cliente'}
+                      </Card.Title>
+                      <Card.Text>
+                        {language === 'en' 
+                          ? 'Understanding your needs and delivering personalized solutions.'
+                          : 'Entendemos suas necessidades e entregamos soluções personalizadas.'}
+                      </Card.Text>
                     </Card.Body>
                   </Card>
                 </Col>
@@ -133,8 +189,14 @@ const HomePage: React.FC = () => {
                   <Card className="h-100 border-0 shadow-soft rounded-xl">
                     <Card.Body className="text-center">
                       <div className="display-4 mb-3">⚡</div>
-                      <Card.Title as="h3" className="h5 mb-3">Desenvolvimento Ágil</Card.Title>
-                      <Card.Text>Metodologias modernas para entregas rápidas e eficientes.</Card.Text>
+                      <Card.Title className="h5 mb-3">
+                        {language === 'en' ? 'Agile Development' : 'Desenvolvimento Ágil'}
+                      </Card.Title>
+                      <Card.Text>
+                        {language === 'en' 
+                          ? 'Modern methodologies for quick and efficient deliveries.'
+                          : 'Metodologias modernas para entregas rápidas e eficientes.'}
+                      </Card.Text>
                     </Card.Body>
                   </Card>
                 </Col>
@@ -142,8 +204,14 @@ const HomePage: React.FC = () => {
                   <Card className="h-100 border-0 shadow-soft rounded-xl">
                     <Card.Body className="text-center">
                       <div className="display-4 mb-3">💡</div>
-                      <Card.Title as="h3" className="h5 mb-3">Inovação Constante</Card.Title>
-                      <Card.Text>Sempre buscando as melhores tecnologias e práticas.</Card.Text>
+                      <Card.Title className="h5 mb-3">
+                        {language === 'en' ? 'Constant Innovation' : 'Inovação Constante'}
+                      </Card.Title>
+                      <Card.Text>
+                        {language === 'en' 
+                          ? 'Always seeking the best technologies and practices.'
+                          : 'Sempre buscando as melhores tecnologias e práticas.'}
+                      </Card.Text>
                     </Card.Body>
                   </Card>
                 </Col>
@@ -153,28 +221,31 @@ const HomePage: React.FC = () => {
         </Container>
       </section>
 
-      {/* CTA Section */}
+      {/* Ready to Start Section */}
       <section className="cta py-5" style={{ background: 'linear-gradient(135deg, #1a365d 0%, #2d3748 100%)' }}>
         <Container>
           <Row className="justify-content-center text-center">
             <Col lg={8}>
-              <h2 className="display-5 fw-bold text-white mb-4">{t.cta.title}</h2>
-              <p className="lead text-light mb-5">{t.cta.description}</p>
+              <h2 className="display-5 fw-bold text-white mb-4">
+                {language === 'en' ? 'Ready to Start?' : 'Pronto para Começar?'}
+              </h2>
+              <p className="lead text-light mb-5">
+                {language === 'en' 
+                  ? 'Transform your business with our AI solutions. Get in touch today!'
+                  : 'Transforme seu negócio com nossas soluções de IA. Entre em contato hoje!'}
+              </p>
               <Button 
                 variant="light" 
                 size="lg" 
                 href="https://webhook.gwan.com.br/form/98bcf216-c30d-4bc1-88b1-e4de524efd99"
                 className="px-5 py-3 rounded-pill"
               >
-                {t.cta.button}
+                {language === 'en' ? "Let's Connect" : "Vamos Conectar"}
               </Button>
             </Col>
           </Row>
         </Container>
       </section>
-
-      {/* Chat Widget */}
-      <Chat />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import './Chat.css';
 
 interface ChatProps {
   chatbotId?: string;
+  isOpen?: boolean;
 }
 
 interface Message {
@@ -31,11 +32,11 @@ window.fetch = async function(input: RequestInfo | URL, init?: RequestInit) {
   return originalFetch(input, init);
 };
 
-const Chat: React.FC<ChatProps> = ({ chatbotId = 'Jaiminho' }) => {
+const Chat: React.FC<ChatProps> = ({ chatbotId = 'Jaiminho', isOpen = false }) => {
   const { language } = useLanguage();
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(isOpen);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const sessionId = useRef(`session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
@@ -73,6 +74,11 @@ const Chat: React.FC<ChatProps> = ({ chatbotId = 'Jaiminho' }) => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  // Update isChatOpen when isOpen prop changes
+  useEffect(() => {
+    setIsChatOpen(isOpen);
+  }, [isOpen]);
 
   const handleSendMessage = async () => {
     if (!inputValue.trim() || !chatbot) return;
@@ -133,16 +139,16 @@ const Chat: React.FC<ChatProps> = ({ chatbotId = 'Jaiminho' }) => {
   };
 
   return (
-    <div className={`chat-container ${isOpen ? 'open' : ''}`}>
-      <button className="chat-toggle" onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? '×' : (
+    <div className={`chat-container ${isChatOpen ? 'open' : ''}`}>
+      <button className="chat-toggle" onClick={() => setIsChatOpen(!isChatOpen)}>
+        {isChatOpen ? '×' : (
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z" fill="#4a90e2"/>
           </svg>
         )}
       </button>
       
-      {isOpen && (
+      {isChatOpen && (
         <div className="chat-window">
           <div className="chat-header">
             <h3>{chatbot?.title[language]}</h3>

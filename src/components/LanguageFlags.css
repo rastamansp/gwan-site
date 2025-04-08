@@ -1,0 +1,28 @@
+.language-flags {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.language-flags button {
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.language-flags button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.language-flags button.active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.language-flags img {
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
+  object-fit: cover;
+} 
