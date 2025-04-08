@@ -1,5 +1,3 @@
-ver
-
 services:
   web:
     image: node:18-alpine
