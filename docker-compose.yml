@@ -1,17 +1,26 @@
-version: '3.8'
+ver
 
 services:
-  gwan-site:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: gwan-site
-    ports:
-      - "80:80"
+  web:
+    image: node:18-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=production
+    command: >
+      sh -c "npm install --production=false &&
+             npm run build &&
+             npm install -g serve &&
+             serve -s build -l 3001"
     restart: unless-stopped
     networks:
-      - gwan-network
+      - app-network
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME:-app}.rule=Host(`${DOMAIN:-localhost}`)
+      - traefik.http.services.${COMPOSE_PROJECT_NAME:-app}.loadbalancer.server.port=3001
 
 networks:
-  gwan-network:
+  app-network:
     driver: bridge 
