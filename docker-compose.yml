@@ -1,24 +1,23 @@
+version: '3.8'
+
 services:
-  web:
-    image: node:18-alpine
+  gwan-site:
+    image: node:20-alpine
+    container_name: gwan-site
     working_dir: /app
+    command: pm2-runtime ecosystem.config.js
     volumes:
-      - .:/app
-    environment:
-      - NODE_ENV=production
-    command: >
-      sh -c "npm install --production=false &&
-             npm run build &&
-             npm install -g serve &&
-             serve -s build -l 3001"
-    restart: unless-stopped
-    networks:
-      - app-network
+      - ./ecosystem.config.js:/app/ecosystem.config.js
+    restart: always
     labels:
-      - traefik.enable=true
-      - traefik.http.routers.${COMPOSE_PROJECT_NAME:-app}.rule=Host(`${DOMAIN:-localhost}`)
-      - traefik.http.services.${COMPOSE_PROJECT_NAME:-app}.loadbalancer.server.port=3001
+      - "traefik.enable=true"
+      - "traefik.http.routers.gwan-site.rule=Host(`gwan.com.br`)"
+      - "traefik.http.routers.gwan-site.entrypoints=websecure"
+      - "traefik.http.routers.gwan-site.tls.certresolver=letsencrypt"
+      - "traefik.http.services.gwan-site.loadbalancer.server.port=3000"
+    networks:
+      - gwan
 
 networks:
-  app-network:
-    driver: bridge 
+  gwan:
+    external: true
