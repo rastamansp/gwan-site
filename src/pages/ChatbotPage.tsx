@@ -40,14 +40,14 @@ const ChatbotPage: React.FC = () => {
         answer: language === 'en' ? 'To prevent the flu, get vaccinated annually, wash hands frequently, and maintain good hygiene.' : 'Para prevenir a gripe, tome a vacina anualmente, lave as mãos com frequência e mantenha boa higiene.'
       }
     ],
-    Empresário: [
+    Marley: [
       {
-        question: language === 'en' ? 'How do I schedule a meeting?' : 'Como agendo uma reunião?',
-        answer: language === 'en' ? 'You can schedule a meeting by providing the date, time, and participants.' : 'Você pode agendar uma reunião fornecendo a data, horário e participantes.'
+        question: language === 'en' ? 'How can I book Junior Dread for a show?' : 'Como posso contratar o Junior Dread para um show?',
+        answer: language === 'en' ? 'To book Junior Dread, please provide details about your event including date, venue, and expected audience size.' : 'Para contratar o Junior Dread, por favor forneça detalhes sobre seu evento incluindo data, local e tamanho esperado do público.'
       },
       {
-        question: language === 'en' ? 'Can I reschedule an appointment?' : 'Posso reagendar um compromisso?',
-        answer: language === 'en' ? 'Yes, you can reschedule by providing the new date and time.' : 'Sim, você pode reagendar fornecendo a nova data e horário.'
+        question: language === 'en' ? 'What is included in the technical rider?' : 'O que está incluído no rider técnico?',
+        answer: language === 'en' ? 'The technical rider includes sound system requirements, stage setup, lighting needs, and other technical specifications for the performance.' : 'O rider técnico inclui requisitos de sistema de som, configuração do palco, necessidades de iluminação e outras especificações técnicas para a apresentação.'
       }
     ],
     Gwan: [

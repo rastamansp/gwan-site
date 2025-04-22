@@ -62,7 +62,7 @@ export const chatbots: Chatbot[] = [
       en: 'Please note that this chatbot is for informational purposes only and should not replace professional medical advice.',
       pt: 'Por favor, note que este chatbot é apenas para fins informativos e não deve substituir o aconselhamento médico profissional.'
     },
-    url: 'https://webhook.gwan.com.br/webhook/5d6d187b-74aa-4321-8dc6-71990695272f/chat',
+    url: 'https://n8n.gwan.com.br/webhook/f6d287e6-1429-4da2-9dee-decb0bf17a60/chat',
     messages: {
       welcome: {
         en: 'Hello! I am Jaiminho, your health assistant. How can I help you today?',
@@ -75,50 +75,50 @@ export const chatbots: Chatbot[] = [
     }
   },
   {
-    id: 'Empresário',
+    id: 'Marley',
     title: {
-      en: 'Booker Chatbot',
-      pt: 'Chatbot de Agendamento'
+      en: 'Artist Manager Chatbot',
+      pt: 'Chatbot do Empresário'
     },
     description: {
-      en: 'Efficiently manage your appointments and bookings with our smart scheduling assistant.',
-      pt: 'Gerencie eficientemente seus compromissos e agendamentos com nosso assistente de agendamento inteligente.'
+      en: 'Get information about Junior Dread\'s career, shows, tours, technical rider, upcoming dates, booking information, and partnership opportunities.',
+      pt: 'Obtenha informações sobre a carreira do Junior Dread, shows, turnês, rider técnico, próximas datas, informações para contratação e oportunidades de parceria.'
     },
     features: [
       {
-        en: 'Scheduling appointments',
-        pt: 'Agendamento de compromissos'
+        en: 'Career information and updates',
+        pt: 'Informações e atualizações da carreira'
       },
       {
-        en: 'Managing bookings',
-        pt: 'Gerenciamento de reservas'
+        en: 'Show and tour schedules',
+        pt: 'Agenda de shows e turnês'
       },
       {
-        en: 'Rescheduling or canceling appointments',
-        pt: 'Reagendamento ou cancelamento de compromissos'
+        en: 'Technical rider details',
+        pt: 'Detalhes do rider técnico'
       },
       {
-        en: 'Providing availability information',
-        pt: 'Fornecimento de informações de disponibilidade'
+        en: 'Booking and partnership inquiries',
+        pt: 'Consultas sobre contratação e parcerias'
       },
       {
-        en: 'Setting up reminders',
-        pt: 'Configuração de lembretes'
+        en: 'Upcoming performance dates',
+        pt: 'Próximas datas de apresentações'
       }
     ],
     disclaimer: {
-      en: 'This chatbot integrates with popular calendar systems to provide seamless booking experiences.',
-      pt: 'Este chatbot se integra com sistemas de calendário populares para fornecer experiências de agendamento perfeitas.'
+      en: 'This chatbot provides information about Junior Dread\'s professional activities and booking opportunities.',
+      pt: 'Este chatbot fornece informações sobre as atividades profissionais do Junior Dread e oportunidades de contratação.'
     },
-    url: 'https://webhook.gwan.com.br/webhook/0b6945c4-c7bb-4a42-bd25-08278eb43fcb/chat',
+    url: 'https://n8n.gwan.com.br/webhook/ba654a7d-bbd1-4a88-b341-32d57c8007bc/chat',
     messages: {
       welcome: {
-        en: 'Hello! I am Empresário, your scheduling assistant. How can I help you with your appointments today?',
-        pt: 'Olá! Eu sou o Empresário, seu assistente de agendamento. Como posso ajudar você com seus compromissos hoje?'
+        en: 'Hello! I am Marley, Junior Dread\'s manager. How can I help you with booking or partnership inquiries today?',
+        pt: 'Olá! Eu sou o Marley, empresário do Junior Dread. Como posso ajudar você com informações sobre contratação ou parcerias hoje?'
       },
       initial: {
-        en: 'I can help you schedule, reschedule, or cancel appointments, check availability, and set up reminders. What would you like to do?',
-        pt: 'Posso ajudar você a agendar, reagendar ou cancelar compromissos, verificar disponibilidade e configurar lembretes. O que você gostaria de fazer?'
+        en: 'I can provide information about Junior Dread\'s career, upcoming shows, technical requirements, booking details, and partnership opportunities. What would you like to know?',
+        pt: 'Posso fornecer informações sobre a carreira do Junior Dread, próximos shows, requisitos técnicos, detalhes de contratação e oportunidades de parceria. O que você gostaria de saber?'
       }
     }
   },
@@ -158,7 +158,7 @@ export const chatbots: Chatbot[] = [
       en: 'This chatbot is designed to enhance your learning experience and provide accurate information.',
       pt: 'Este chatbot foi projetado para melhorar sua experiência de aprendizado e fornecer informações precisas.'
     },
-    url: 'https://webhook.gwan.com.br/webhook/42fda7c2-4ae4-447f-9f2e-49ca9dec0a98/chat',
+    url: 'https://n8n.gwan.com.br/webhook/020db69f-901b-4f90-aa26-1162cb551315/chat',
     messages: {
       welcome: {
         en: 'Hello! I am Gwan, your knowledge assistant. What would you like to learn about today?',
