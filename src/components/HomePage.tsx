@@ -12,7 +12,7 @@ const getEmojiIcon = (chatbotId: string) => {
   switch (chatbotId) {
     case 'Jaiminho':
       return '🌿';
-    case 'Empresário':
+    case 'Marley':
       return '🎭';
     case 'Gwan':
       return '🏢';
@@ -38,11 +38,11 @@ const HomePage: React.FC = () => {
         : 'Seu médico naturopata, fornecendo informações sobre causas, sintomas e tratamentos naturais para doenças do século XXI.'
     },
     {
-      id: 'Empresário',
-      title: language === 'en' ? 'Empresário' : 'Empresário',
+      id: 'Marley',
+      title: language === 'en' ? 'Marley' : 'Marley',
       description: language === 'en'
-        ? 'Your virtual artist manager, providing information about available artists and handling booking inquiries.'
-        : 'Seu empresário virtual, fornecendo informações sobre artistas disponíveis e gerenciando consultas de contratação.'
+        ? 'Get information about Junior Dread\'s career, shows, tours, technical rider, upcoming dates, booking information, and partnership opportunities.'
+        : 'Obtenha informações sobre a carreira do Junior Dread, shows, turnês, rider técnico, próximas datas, informações para contratação e oportunidades de parceria.'
     },
     {
       id: 'Gwan',
@@ -237,7 +237,7 @@ const HomePage: React.FC = () => {
               <Button 
                 variant="light" 
                 size="lg" 
-                href="https://webhook.gwan.com.br/form/98bcf216-c30d-4bc1-88b1-e4de524efd99"
+                href="https://n8n.gwan.com.br/form/9d3d8b70-1781-44e7-b8b3-0fef87752d33"
                 className="px-5 py-3 rounded-pill"
               >
                 {language === 'en' ? "Let's Connect" : "Vamos Conectar"}

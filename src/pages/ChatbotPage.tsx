@@ -77,7 +77,7 @@ const ChatbotPage: React.FC = () => {
             >
               {chatbots.map((bot) => (
                 <option key={bot.id} value={bot.id}>
-                  {bot.title[language]}
+                  {bot.id}
                 </option>
               ))}
             </select>
