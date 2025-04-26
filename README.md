@@ -1,138 +1,140 @@
-# Gwan Company Website
+# Site da Gwan Company
 
-A modern, bilingual (PT/EN) website for Gwan Company, built with React and TypeScript.
+Um site moderno e bilíngue (PT/EN) para a Gwan Company, construído com React e TypeScript.
 
-## Features
+## Recursos
 
-- 🌐 Bilingual support (Portuguese/English)
-- 🎨 Modern, responsive design
-- 🚀 Optimized for production
-- 🔄 Automated CI/CD pipeline
-- 🐳 Docker support for easy deployment
+- 🌐 Suporte bilíngue (Português/Inglês)
+- 🎨 Design moderno e responsivo
+- 🚀 Otimizado para produção
+- 🔄 Pipeline de CI/CD automatizado
+- 🐳 Suporte a Docker para fácil implantação
 
-## Development
+## Desenvolvimento
 
 ```bash
-# Install dependencies
+# Instalar dependências
 npm install
 
-# Start development server
+# Iniciar servidor de desenvolvimento
 npm start
 ```
 
-## Docker Deployment
+## Implantação com Docker
 
-### Prerequisites
-- Docker installed on your system
-- Git (for cloning the repository)
+### Pré-requisitos
+- Docker instalado no seu sistema
+- Git (para clonar o repositório)
 
-### Quick Start with Docker
+### Início Rápido com Docker
 
-1. Clone the repository:
+1. Clone o repositório:
 ```bash
 git clone https://github.com/rastamansp/gwan-site.git
 cd gwan-site
 ```
 
-2. Build the Docker image:
+2. Construa a imagem Docker:
 ```bash
 docker build -t gwan-site .
 ```
 
-3. Run the container:
+3. Execute o container:
 ```bash
 docker run -d -p 80:80 --name gwan-site gwan-site
 ```
 
-4. Access the site:
-- Open http://localhost in your browser
+4. Acesse o site:
+- Abra http://localhost no seu navegador
 
-### Docker Commands Reference
+### Referência de Comandos Docker
 
 ```bash
-# Stop the container
+# Parar o container
 docker stop gwan-site
 
-# Start the container
+# Iniciar o container
 docker start gwan-site
 
-# View container logs
+# Ver logs do container
 docker logs gwan-site
 
-# Remove the container
+# Remover o container
 docker rm gwan-site
 
-# Remove the image
+# Remover a imagem
 docker rmi gwan-site
 ```
 
-## VPS Deployment
+## Implantação na VPS
 
-### Prerequisites
+Para informações detalhadas sobre a configuração da VPS, componentes e configuração, consulte a [Documentação da VPS](VPS_README.md).
 
-1. A VPS with:
-   - Docker installed
-   - Git installed
-   - SSH access configured
+### Pré-requisitos
 
-2. GitHub repository secrets:
-   - `SSH_PRIVATE_KEY`: Your SSH private key for VPS access
-   - `VPS_HOST`: Your VPS hostname or IP
-   - `VPS_USER`: SSH username for your VPS
+1. Uma VPS com:
+   - Docker instalado
+   - Git instalado
+   - Acesso SSH configurado
 
-### Initial VPS Setup
+2. Secrets do repositório GitHub:
+   - `SSH_PRIVATE_KEY`: Sua chave privada SSH para acesso à VPS
+   - `VPS_HOST`: Seu hostname ou IP da VPS
+   - `VPS_USER`: Nome de usuário SSH para sua VPS
 
-1. SSH into your VPS
-2. Create deployment directory:
+### Configuração Inicial da VPS
+
+1. Conecte-se à VPS via SSH
+2. Crie o diretório de implantação:
    ```bash
    mkdir -p /var/www/gwan-site
    cd /var/www/gwan-site
    ```
-3. Clone the repository:
+3. Clone o repositório:
    ```bash
    git clone https://github.com/rastamansp/gwan-site.git .
    ```
-4. Make deployment script executable:
+4. Torne o script de implantação executável:
    ```bash
    chmod +x deploy.sh
    ```
-5. Run initial deployment:
+5. Execute a implantação inicial:
    ```bash
    ./deploy.sh
    ```
 
-### CI/CD Setup
+### Configuração do CI/CD
 
-1. Go to your GitHub repository settings
-2. Navigate to "Secrets and variables" > "Actions"
-3. Add the following secrets:
-   - `SSH_PRIVATE_KEY`: Your SSH private key
-   - `VPS_HOST`: Your VPS hostname or IP
-   - `VPS_USER`: SSH username for your VPS
+1. Vá para as configurações do seu repositório GitHub
+2. Navegue até "Secrets and variables" > "Actions"
+3. Adicione os seguintes secrets:
+   - `SSH_PRIVATE_KEY`: Sua chave privada SSH
+   - `VPS_HOST`: Seu hostname ou IP da VPS
+   - `VPS_USER`: Nome de usuário SSH para sua VPS
 
-The CI/CD pipeline will automatically:
-- Deploy on every push to main branch
-- Pull latest changes
-- Rebuild and restart the container
+O pipeline de CI/CD irá automaticamente:
+- Implantar a cada push para a branch main
+- Atualizar as alterações
+- Reconstruir e reiniciar o container
 
-## Manual Deployment
+## Implantação Manual
 
-If you need to deploy manually:
+Se precisar implantar manualmente:
 
 ```bash
-# SSH into your VPS
-ssh user@your-vps
+# Conecte-se à VPS via SSH
+ssh usuario@sua-vps
 
-# Navigate to project directory
+# Navegue até o diretório do projeto
 cd /var/www/gwan-site
 
-# Pull latest changes
+# Atualize as alterações
 git pull origin main
 
-# Run deployment script
+# Execute o script de implantação
 ./deploy.sh
 ```
 
-## License
+## Licença
 
 MIT
