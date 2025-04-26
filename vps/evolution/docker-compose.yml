@@ -1,0 +1,83 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:7
+    container_name: redis
+    restart: always
+    networks:
+      - gwan
+    volumes:
+      - redis_data:/data
+
+  evolution_api_v2_data:
+    image: atendai/evolution-api:v2.2.3
+    command: sh -c "node dist/main || tail -f /dev/null"
+    volumes:
+      - evolution_api_v2_data:/evolution/instances
+    networks:
+      - gwan
+    environment:
+      - SERVER_URL=https://evolution.gwan.com.br
+      - DEL_INSTANCE=false
+      - DATABASE_PROVIDER=postgresql
+      - DATABASE_CONNECTION_URI=postgresql://root:pazdeDeus%402025@postgres:5432/evolution2
+      - DATABASE_SAVE_DATA_INSTANCE=true
+      - DATABASE_SAVE_DATA_NEW_MESSAGE=true
+      - DATABASE_SAVE_MESSAGE_UPDATE=true
+      - DATABASE_SAVE_DATA_CONTACTS=true
+      - DATABASE_SAVE_DATA_CHATS=true
+      - DATABASE_SAVE_DATA_LABELS=true
+      - DATABASE_SAVE_DATA_HISTORIC=true
+      - DATABASE_CONNECTION_CLIENT_NAME=evolution_api_v2
+      - QRCODE_LIMIT=999
+      - QRCODE_COLOR=#000000
+      - RABBITMQ_ENABLED=false
+      - SQS_ENABLED=false
+      - WEBSOCKET_ENABLED=false
+      - WEBSOCKET_GLOBAL_EVENTS=false
+      - WA_BUSINESS_TOKEN_WEBHOOK=evolution
+      - WA_BUSINESS_URL=https://graph.facebook.com
+      - WA_BUSINESS_VERSION=v20.0
+      - WA_BUSINESS_LANGUAGE=en_US
+      - WEBHOOK_GLOBAL_ENABLED=false
+      - CONFIG_SESSION_PHONE_CLIENT=EvolutionAPIV2
+      - CONFIG_SESSION_PHONE_NAME=Chrome
+      - CONFIG_SESSION_PHONE_VERSION=2.3000.1015901307
+      - OPENAI_ENABLED=true
+      - DIFY_ENABLED=true
+      - TYPEBOT_ENABLED=true
+      - TYPEBOT_API_VERSION=v2.27.0
+      - CHATWOOT_ENABLED=true
+      - CHATWOOT_MESSAGE_READ=true
+      - CHATWOOT_MESSAGE_DELETE=true
+      - CHATWOOT_IMPORT_DATABASE_CONNECTION_URI=postgresql://postgres:pazdeDeus%402025@postgres:5432/chatwoot?sslmode=disable
+      - CHATWOOT_IMPORT_PLACEHOLDER_MEDIA_MESSAGE=true
+      - CACHE_REDIS_ENABLED=true
+      - CACHE_REDIS_URI=redis://redis:6379/6
+      - CACHE_REDIS_PREFIX_KEY=evolution_api_v2
+      - CACHE_REDIS_SAVE_INSTANCES=false
+      - CACHE_LOCAL_ENABLED=false
+      - S3_ENABLED=false
+      - AUTHENTICATION_API_KEY=pazdeDeus@2025
+      - AUTHENTICATION_EXPOSE_IN_FETCH_INSTANCES=true
+      - LANGUAGE=en
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.evolution_api_v2.rule=Host(`evolution.gwan.com.br`)
+      - traefik.http.routers.evolution_api_v2.entrypoints=websecure
+      - traefik.http.routers.evolution_api_v2.tls.certresolver=letsencrypt
+      - traefik.http.routers.evolution_api_v2.priority=1
+      - traefik.http.routers.evolution_api_v2.service=evolution_api_v2
+      - traefik.http.services.evolution_api_v2.loadbalancer.server.port=8080
+      - traefik.http.services.evolution_api_v2.loadbalancer.passHostHeader=true
+
+volumes:
+  evolution_api_v2_data:
+    external: true
+    name: evolution_api_v2_data
+  redis_data:
+
+networks:
+  gwan:
+    external: true

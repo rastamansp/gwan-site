@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    command: server --console-address ":9001" /data
+    environment:
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=pazdeDeus@2025
+    volumes:
+      - minio_data:/data
+    networks:
+      - gwan
+    labels:
+      - "traefik.enable=true"
+
+      ## Middleware - Redireciona acesso da API pro Console
+      - "traefik.http.middlewares.redirect-to-console.redirectregex.regex=^https?://minio.gwan.com.br/(.*)"
+      - "traefik.http.middlewares.redirect-to-console.redirectregex.replacement=https://console.minio.gwan.com.br/$${1}"
+      - "traefik.http.middlewares.redirect-to-console.redirectregex.permanent=true"
+
+      ## API S3 - HTTPS Only
+      - "traefik.http.routers.minio-secure.rule=Host(`minio.gwan.com.br`)"
+      - "traefik.http.routers.minio-secure.entrypoints=websecure"
+      - "traefik.http.routers.minio-secure.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.minio-secure.middlewares=redirect-to-console"
+      - "traefik.http.routers.minio-secure.service=minio-api"
+      - "traefik.http.services.minio-api.loadbalancer.server.port=9000"
+
+      ## Console Web - HTTPS Only
+      - "traefik.http.routers.minio-console-secure.rule=Host(`console.minio.gwan.com.br`)"
+      - "traefik.http.routers.minio-console-secure.entrypoints=websecure"
+      - "traefik.http.routers.minio-console-secure.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.minio-console-secure.service=minio-console"
+      - "traefik.http.services.minio-console.loadbalancer.server.port=9001"
+
+volumes:
+  minio_data:
+    external: true
+
+networks:
+  gwan:
+    external: true

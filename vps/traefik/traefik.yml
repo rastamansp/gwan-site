@@ -1,0 +1,57 @@
+entryPoints:
+  web:
+    address: ":80"
+  websecure:
+    address: ":443"
+  mongo:
+    address: ":27017"
+
+certificatesResolvers:
+  letsencryptresolver:
+    acme:
+      email: contato@gwan.com.br
+      storage: /letsencrypt/acme.json
+      httpChallenge:
+        entryPoint: web
+
+providers:
+  docker:
+    exposedByDefault: false
+
+api:
+  dashboard: true
+  insecure: false
+
+log:
+  level: DEBUG
+
+http:
+  routers:
+    gwan-site:
+      rule: "Host(`gwan.com.br`)"
+      entryPoints:
+        - websecure
+      tls:
+        certResolverName: letsencrypt
+      service: gwan-site
+
+  services:
+    gwan-site:
+      loadBalancer:
+        server:
+          port: 3000
+
+tcp:
+  routers:    
+    mongo:
+      rule: "Host(`mongodb.gwan.com.br`)"
+      entryPoints:
+        - mongo
+      service: mongo
+
+  services:
+    mongo:
+      loadBalancer:
+        server:
+          port: 27017
+  

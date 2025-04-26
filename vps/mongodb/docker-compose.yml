@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    networks:
+      - gwan
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: gwan
+      MONGO_INITDB_ROOT_PASSWORD: pazdeDeus2025
+      MONGO_INITDB_DATABASE: admin
+
+volumes:
+  mongo_data:
+    external: true
+
+networks:
+  gwan:
+    external: true

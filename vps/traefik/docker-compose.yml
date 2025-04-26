@@ -1,0 +1,39 @@
+services:
+  traefik:
+    image: traefik:v3.0
+    container_name: traefik
+    restart: always
+    command:
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--providers.file.directory=/etc/traefik/tcp"
+      - "--providers.file.watch=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--api.dashboard=true"
+      - "--api.insecure=false"
+      - "--log.level=DEBUG"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - traefik_config:/etc/traefik
+      - traefik_letsencrypt:/letsencrypt
+      - /opt/traefik/tcp:/etc/traefik/tcp
+    networks:
+      - gwan
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.gwan.com.br`)"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.traefik.service=api@internal"
+
+volumes:
+  traefik_config:
+  traefik_letsencrypt:
+
+networks:
+  gwan:
+    external: true

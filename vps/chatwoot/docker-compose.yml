@@ -1,0 +1,79 @@
+version: '3'
+
+services:
+  rails:
+    image: chatwoot/chatwoot:latest
+    volumes:
+      - chatwoot_storage:/app/storage
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - '3000:3000'
+    entrypoint: docker/entrypoints/rails.sh
+    command: ['bundle', 'exec', 'rails', 's', '-p', '3000', '-b', '0.0.0.0']
+    restart: always
+    environment:
+      - REDIS_URL=redis://:SuaSenhaRedis@redis:6379
+      - REDIS_PASSWORD=SuaSenhaRedis
+      - POSTGRES_PASSWORD=SuaSenhaPostgres
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=chatwoot
+      - RAILS_ENV=production
+      - SECRET_KEY_BASE=SuaChaveGeradaComRake
+      - RAILS_LOG_TO_STDOUT=true
+      - LOG_LEVEL=info
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.chatwoot.rule=Host(`chatwoot.gwan.com.br`)"
+      - "traefik.http.routers.chatwoot.entrypoints=websecure"
+      - "traefik.http.routers.chatwoot.tls.certresolver=myresolver"
+      - "traefik.http.services.chatwoot.loadbalancer.server.port=3000"
+
+  sidekiq:
+    image: chatwoot/chatwoot:latest
+    volumes:
+      - chatwoot_storage:/app/storage
+    depends_on:
+      - postgres
+      - redis
+    command: ['bundle', 'exec', 'sidekiq', '-C', 'config/sidekiq.yml']
+    restart: always
+    environment:
+      - REDIS_URL=redis://:SuaSenhaRedis@redis:6379
+      - REDIS_PASSWORD=SuaSenhaRedis
+      - POSTGRES_PASSWORD=SuaSenhaPostgres
+      - POSTGRES_HOST=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=chatwoot
+      - RAILS_ENV=production
+      - SECRET_KEY_BASE=SuaChaveGeradaComRake
+      - RAILS_LOG_TO_STDOUT=true
+      - LOG_LEVEL=info
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    restart: always
+    volumes:
+      - chatwoot_postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=chatwoot
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=SuaSenhaPostgres
+
+  redis:
+    image: redis:alpine
+    restart: always
+    command: ["sh", "-c", "redis-server --requirepass 'SuaSenhaRedis'"]
+    volumes:
+      - chatwoot_redis:/data
+
+volumes:
+  chatwoot_storage:
+  chatwoot_postgres:
+  chatwoot_redis:
+
+networks:
+  default:
+    name: gwan_network

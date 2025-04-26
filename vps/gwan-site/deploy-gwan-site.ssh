@@ -1,0 +1,40 @@
+#!/bin/bash
+
+echo "🔄 Iniciando processo de deploy do gwan-site..."
+
+SITE_PATH="/opt/gwan-site"
+
+if [ ! -d "$SITE_PATH" ]; then
+  echo "❌ Diretório $SITE_PATH não encontrado!"
+  exit 1
+fi
+
+cd "$SITE_PATH" || exit
+
+# Etapa extra: mostrar versão e commit atual
+if [ -f "package.json" ]; then
+  VERSION=$(jq -r '.version' package.json)
+  echo "📦 Versão atual do package.json: v$VERSION"
+fi
+
+echo "📜 Último commit:"
+git --no-pager log -1 --pretty=format:"🔹 %h - %s (%cr) by %an"
+
+# Etapa 1: Preparar ambiente
+echo "📥 Executando git pull..."
+git stash save "Auto-stash antes do deploy" > /dev/null 2>&1
+git pull
+
+# Etapa 2: Instalar dependências
+echo "📦 Instalando dependências..."
+npm install
+
+# Etapa 3: Build do projeto React
+echo "⚙️ Gerando build de produção..."
+npm run build
+
+# Etapa 4: Reinicia o container Docker
+echo "🐳 Reiniciando container Docker gwan-site..."
+docker restart gwan-site
+
+echo "✅ Deploy finalizado com sucesso! Acesse: https://gwan.com.br"
