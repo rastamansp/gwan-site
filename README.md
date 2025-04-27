@@ -71,3 +71,24 @@ Cada serviço mantém seus dados em volumes Docker específicos, garantindo pers
 - Monitoramento via Traefik dashboard
 - Backup regular dos volumes
 - Atualizações de segurança periódicas
+
+## Deploy em Produção
+
+Após realizar alterações no projeto, para atualizar a versão em produção:
+
+1. Acesse a VPS:
+```bash
+ssh root@69.62.99.103
+```
+
+2. Navegue até o diretório de deploy:
+```bash
+cd /opt/
+```
+
+3. Execute o script de deploy:
+```bash
+./deploy-gwan-site.ssh
+```
+
+Este processo irá atualizar a versão do site em produção com as últimas alterações do repositório.
