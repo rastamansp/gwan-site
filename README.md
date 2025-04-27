@@ -1,140 +1,73 @@
-# Site da Gwan Company
+# Gwan Site Infrastructure
 
-Um site moderno e bilíngue (PT/EN) para a Gwan Company, construído com React e TypeScript.
+Este repositório contém a configuração da infraestrutura do site da Gwan Company.
 
-## Recursos
+## Serviços
 
-- 🌐 Suporte bilíngue (Português/Inglês)
-- 🎨 Design moderno e responsivo
-- 🚀 Otimizado para produção
-- 🔄 Pipeline de CI/CD automatizado
-- 🐳 Suporte a Docker para fácil implantação
+### [Traefik](vps/traefik/README.md)
+- Proxy reverso
+- Gerenciamento de certificados SSL
+- Dashboard: https://traefik.gwan.com.br
 
-## Desenvolvimento
+### [RabbitMQ](vps/rabbitmq/README.md)
+- Servidor de mensageria
+- Interface de gerenciamento: https://rabbitmq.gwan.com.br
+- Usuário: root
+- Senha: pazdeDeus2025
 
-```bash
-# Instalar dependências
-npm install
+### [Gwan Site](vps/gwan-site/README.md)
+- Site principal
+- URL: https://gwan.com.br
 
-# Iniciar servidor de desenvolvimento
-npm start
-```
+### [MongoDB](vps/mongodb/README.md)
+- Banco de dados NoSQL
+- Usado por vários serviços
 
-## Implantação com Docker
+### [MinIO](vps/minio/README.md)
+- Armazenamento de objetos
+- Compatível com S3
 
-### Pré-requisitos
-- Docker instalado no seu sistema
-- Git (para clonar o repositório)
+### [Chatwoot](vps/chatwoot/README.md)
+- Plataforma de atendimento ao cliente
+- Integração com WhatsApp
 
-### Início Rápido com Docker
+### [N8N](vps/n8n/README.md)
+- Automação de fluxos de trabalho
+- Integração entre serviços
 
-1. Clone o repositório:
-```bash
-git clone https://github.com/rastamansp/gwan-site.git
-cd gwan-site
-```
+### [Firecrawl](vps/firecrawl/README.md)
+- API de web scraping
+- Processamento de dados
 
-2. Construa a imagem Docker:
-```bash
-docker build -t gwan-site .
-```
+### [Evolution](vps/evolution/README.md)
+- API de processamento de documentos
+- Conversão de PDF para Markdown
 
-3. Execute o container:
-```bash
-docker run -d -p 80:80 --name gwan-site gwan-site
-```
+## Rede
 
-4. Acesse o site:
-- Abra http://localhost no seu navegador
+Todos os serviços compartilham a rede Docker `gwan`, permitindo comunicação segura entre eles.
 
-### Referência de Comandos Docker
+## Volumes
 
-```bash
-# Parar o container
-docker stop gwan-site
+Cada serviço mantém seus dados em volumes Docker específicos, garantindo persistência e isolamento.
 
-# Iniciar o container
-docker start gwan-site
+## Segurança
 
-# Ver logs do container
-docker logs gwan-site
+- Todos os serviços são protegidos por TLS via Let's Encrypt
+- Autenticação básica onde necessário
+- Rede Docker isolada
+- Volumes persistentes
 
-# Remover o container
-docker rm gwan-site
+## Implantação
 
-# Remover a imagem
-docker rmi gwan-site
-```
+1. Clone o repositório
+2. Configure as variáveis de ambiente necessárias
+3. Inicie os serviços usando Docker Compose
+4. Acesse os serviços através dos domínios configurados
 
-## Implantação na VPS
+## Manutenção
 
-Para informações detalhadas sobre a configuração da VPS, componentes e configuração, consulte a [Documentação da VPS](VPS_README.md).
-
-### Pré-requisitos
-
-1. Uma VPS com:
-   - Docker instalado
-   - Git instalado
-   - Acesso SSH configurado
-
-2. Secrets do repositório GitHub:
-   - `SSH_PRIVATE_KEY`: Sua chave privada SSH para acesso à VPS
-   - `VPS_HOST`: Seu hostname ou IP da VPS
-   - `VPS_USER`: Nome de usuário SSH para sua VPS
-
-### Configuração Inicial da VPS
-
-1. Conecte-se à VPS via SSH
-2. Crie o diretório de implantação:
-   ```bash
-   mkdir -p /var/www/gwan-site
-   cd /var/www/gwan-site
-   ```
-3. Clone o repositório:
-   ```bash
-   git clone https://github.com/rastamansp/gwan-site.git .
-   ```
-4. Torne o script de implantação executável:
-   ```bash
-   chmod +x deploy.sh
-   ```
-5. Execute a implantação inicial:
-   ```bash
-   ./deploy.sh
-   ```
-
-### Configuração do CI/CD
-
-1. Vá para as configurações do seu repositório GitHub
-2. Navegue até "Secrets and variables" > "Actions"
-3. Adicione os seguintes secrets:
-   - `SSH_PRIVATE_KEY`: Sua chave privada SSH
-   - `VPS_HOST`: Seu hostname ou IP da VPS
-   - `VPS_USER`: Nome de usuário SSH para sua VPS
-
-O pipeline de CI/CD irá automaticamente:
-- Implantar a cada push para a branch main
-- Atualizar as alterações
-- Reconstruir e reiniciar o container
-
-## Implantação Manual
-
-Se precisar implantar manualmente:
-
-```bash
-# Conecte-se à VPS via SSH
-ssh usuario@sua-vps
-
-# Navegue até o diretório do projeto
-cd /var/www/gwan-site
-
-# Atualize as alterações
-git pull origin main
-
-# Execute o script de implantação
-./deploy.sh
-```
-
-## Licença
-
-MIT
+- Logs disponíveis via Docker logs
+- Monitoramento via Traefik dashboard
+- Backup regular dos volumes
+- Atualizações de segurança periódicas
