@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   rabbitmq:
     image: rabbitmq:3-management
@@ -10,6 +8,9 @@ services:
       - RABBITMQ_DEFAULT_PASS=pazdeDeus2025
     networks:
       - gwan
+    ports:
+      - "5672:5672"     # Porta AMQP para conexões de aplicativos
+      - "15672:15672"   # Porta HTTP para acessar o painel (já liberada via Traefik também)
     command: ["rabbitmq-server", "--log-level", "info"]
     labels:
       - "traefik.enable=true"
@@ -18,7 +19,6 @@ services:
       - "traefik.http.routers.rabbitmq.tls=true"
       - "traefik.http.routers.rabbitmq.tls.certresolver=letsencrypt"
       - "traefik.http.services.rabbitmq.loadbalancer.server.port=15672"
-
 networks:
   gwan:
-    external: true
+    external: true  # Rede deve existir previamente no Docker

@@ -1,0 +1,14 @@
+Para criar Usuário 
+
+comando:
+docker-compose run --rm rails bundle exec rails console
+
+
+user = User.new(
+  name: 'Admin',
+  email: 'pedro.hp.almeida@gmail.com',
+  password: 'pazdeDeus@2025',
+  password_confirmation: 'pazdeDeus@2025'
+)
+user.skip_confirmation!
+user.save!

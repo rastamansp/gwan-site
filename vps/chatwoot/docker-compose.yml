@@ -1,79 +1,72 @@
 version: '3'
 
 services:
-  rails:
+  base: &base
     image: chatwoot/chatwoot:latest
     volumes:
-      - chatwoot_storage:/app/storage
+      - /data/storage:/app/storage
+
+  rails:
+    <<: *base
     depends_on:
-      - postgres
       - redis
-    ports:
-      - '3000:3000'
+    networks:
+      - gwan
+    environment:
+      - NODE_ENV=production
+      - RAILS_ENV=production
+      - INSTALLATION_ENV=docker
+      - POSTGRES_HOST=postgres.gwan.com.br
+      - POSTGRES_PORT=5432
+      - POSTGRES_DATABASE=chatwoot_production
+      - POSTGRES_USERNAME=root
+      - POSTGRES_PASSWORD=pazdeDeus2025
+      - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY_BASE=f5e1bcbe911e4f0d8f5e113d365b4b10f3cf4cc44a0de91bcaad2eab08776f85e4e5b1ed0cfab850d4b0e23df22cce07a02b60d32efaa53a2e3a48aa937a4c49
+
     entrypoint: docker/entrypoints/rails.sh
     command: ['bundle', 'exec', 'rails', 's', '-p', '3000', '-b', '0.0.0.0']
     restart: always
-    environment:
-      - REDIS_URL=redis://:SuaSenhaRedis@redis:6379
-      - REDIS_PASSWORD=SuaSenhaRedis
-      - POSTGRES_PASSWORD=SuaSenhaPostgres
-      - POSTGRES_HOST=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=chatwoot
-      - RAILS_ENV=production
-      - SECRET_KEY_BASE=SuaChaveGeradaComRake
-      - RAILS_LOG_TO_STDOUT=true
-      - LOG_LEVEL=info
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.chatwoot.rule=Host(`chatwoot.gwan.com.br`)"
       - "traefik.http.routers.chatwoot.entrypoints=websecure"
-      - "traefik.http.routers.chatwoot.tls.certresolver=myresolver"
+      - "traefik.http.routers.chatwoot.tls.certresolver=letsencrypt"
       - "traefik.http.services.chatwoot.loadbalancer.server.port=3000"
+      - "traefik.docker.network=gwan"
+      - "traefik.http.routers.chatwoot.service=chatwoot"
 
   sidekiq:
-    image: chatwoot/chatwoot:latest
-    volumes:
-      - chatwoot_storage:/app/storage
+    <<: *base
     depends_on:
-      - postgres
       - redis
+    networks:
+      - gwan
+    environment:
+      - NODE_ENV=production
+      - RAILS_ENV=production
+      - INSTALLATION_ENV=docker
+      - POSTGRES_HOST=postgres.gwan.com.br
+      - POSTGRES_PORT=5432
+      - POSTGRES_DATABASE=chatwoot_production
+      - POSTGRES_USERNAME=root
+      - POSTGRES_PASSWORD=pazdeDeus2025
+      - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY_BASE=f5e1bcbe911e4f0d8f5e113d365b4b10f3cf4cc44a0de91bcaad2eab08776f85e4e5b1ed0cfab850d4b0e23df22cce07a02b60d32efaa53a2e3a48aa937a4c49
     command: ['bundle', 'exec', 'sidekiq', '-C', 'config/sidekiq.yml']
     restart: always
-    environment:
-      - REDIS_URL=redis://:SuaSenhaRedis@redis:6379
-      - REDIS_PASSWORD=SuaSenhaRedis
-      - POSTGRES_PASSWORD=SuaSenhaPostgres
-      - POSTGRES_HOST=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=chatwoot
-      - RAILS_ENV=production
-      - SECRET_KEY_BASE=SuaChaveGeradaComRake
-      - RAILS_LOG_TO_STDOUT=true
-      - LOG_LEVEL=info
-
-  postgres:
-    image: pgvector/pgvector:pg16
-    restart: always
-    volumes:
-      - chatwoot_postgres:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=chatwoot
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=SuaSenhaPostgres
 
   redis:
     image: redis:alpine
     restart: always
-    command: ["sh", "-c", "redis-server --requirepass 'SuaSenhaRedis'"]
+    command: ["redis-server"]
     volumes:
-      - chatwoot_redis:/data
-
-volumes:
-  chatwoot_storage:
-  chatwoot_postgres:
-  chatwoot_redis:
+      - /data/redis:/data
+    ports:
+      - '127.0.0.1:6379:6379'
+    networks:
+      - gwan
 
 networks:
-  default:
-    name: gwan_network
+  gwan:
+    external: true
